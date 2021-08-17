@@ -1,0 +1,16 @@
+// Mock API class
+class CovidAPI {
+  Future<int> getCases() => Future.value(1000);
+  Future<int> getRecovered() => Future.value(100);
+  Future<int> getDeaths() => Future.value(10);
+}
+
+To execute all these futures concurrently, use Future.wait. This takes a list or futures and returns a future of lists:
+
+final api = CovidAPI();
+final values = await Future.wait([
+    api.getCases(),
+    api.getRecovered(),
+    api.getDeaths(),
+]);
+print(values); // [1000, 100, 10]
